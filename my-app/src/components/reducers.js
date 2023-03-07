@@ -1,3 +1,5 @@
+import { createStore } from 'redux';
+
 const initialState = {
     error: null,
     isLoaded: false,
@@ -6,28 +8,30 @@ const initialState = {
     itemsPerPage: 10,
   };
   
-  const rootReducer = (state = initialState, action) => {
+  function reducer(state = initialState, action) {
     switch (action.type) {
       case 'FETCH_DATA_SUCCESS':
         return {
           ...state,
           isLoaded: true,
-          items: action.payload.data,
+          items: action.payload,
         };
       case 'FETCH_DATA_FAILURE':
         return {
           ...state,
           isLoaded: true,
-          error: action.payload.error,
+          error: action.payload,
         };
       case 'CHANGE_PAGE':
         return {
           ...state,
-          currentPage: action.payload.pageNumber,
+          currentPage: action.payload,
         };
       default:
         return state;
     }
-  };
+  }
   
-  export default rootReducer;
+  const store = createStore(reducer);
+  
+  export default store;

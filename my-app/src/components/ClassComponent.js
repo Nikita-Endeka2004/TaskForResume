@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 export default class ClassComponent extends Component {
@@ -20,26 +21,17 @@ export default class ClassComponent extends Component {
       'app-id': '640739832c9a7937e33517e3',
     };
     axios
-    .get(url, { headers })
-    .then((response) => {
-      this.setState({
-        isLoaded: true,
-        items: response.data.data,
+      .get(url, { headers })
+      .then((response) => {
+        this.props.fetchDataSuccess(response.data);
+      })
+      .catch((error) => {
+        this.props.fetchDataFailure(error);
       });
-      console.dir(response);
-    })
-    .catch((error) => {
-      this.setState({
-        isLoaded: true,
-        error,
-      });
-    });
   }
 
   handleClick = (event) => {
-    this.setState({
-      currentPage: Number(event.target.id),
-    });
+    this.props.changePage(Number(event.target.id));
   };
 
   render() {

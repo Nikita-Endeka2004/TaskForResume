@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import ClassComponent from './components/ClassComponent';
-import rootReducer from './components/reducers';
-import './App.css';
+import ClassComponent from '.components/ClassComponent';
+import rootReducer from '.components/reducers';
 
 const store = createStore(rootReducer);
 
