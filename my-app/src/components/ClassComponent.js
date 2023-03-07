@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { fetchDataSuccess, fetchDataFailure, changePage } from './store';
 
-export default class ClassComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: [],
-      currentPage: 1,
-      itemsPerPage: 10,
-    };
-  }
-
+class ClassComponent extends Component {
   componentDidMount() {
     const url = 'https://dummyapi.io/data/v1/user';
     const headers = {
@@ -35,7 +24,7 @@ export default class ClassComponent extends Component {
   };
 
   render() {
-    const { error, isLoaded, items, currentPage, itemsPerPage } = this.state;
+    const { error, isLoaded, items, currentPage, itemsPerPage } = this.props;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
@@ -65,24 +54,43 @@ export default class ClassComponent extends Component {
     } else {
       return (
         <div>
-            <div className='container'>
-                <div className="unit">
-                {currentItems.map((item) => (
-                    <div className="pod_unit" key={item.id}>
-                    <div className="img_in_unit">
-                        <img src={item.picture} alt={item.id} />
-                    </div>
-                    <p>{item.id}</p>
-                    <h3>{`${item.title}. ${item.firstName} ${item.lastName}`}</h3>
-                    </div>
-                ))}
+          <div className='container'>
+            <div className='unit'>
+              {currentItems.map((item) => (
+                <div className='pod_unit' key={item.id}>
+                  <div className='img_in_unit'>
+                    <img src={item.picture} alt={item.id} />
+                  </div>
+                  <p>{item.id}</p>
+                  <h3>{`${item.title}. ${item.firstName} ${item.lastName}`}</h3>
+                  <p>{`Email: ${item.email}`}</p>
                 </div>
+              ))}
             </div>
-            <div className='pagination'>
-                {renderPageNumbers}
-            </div>
+          </div>
+          <div className='pagination'>{renderPageNumbers}</div>
         </div>
       );
     }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.items,
+    currentPage: state.currentPage,
+    itemsPerPage: state.itemsPerPage,
+    error: state.error,
+    isLoaded: state.isLoaded,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchDataSuccess: (items) => dispatch(fetchDataSuccess(items)),
+    fetchDataFailure: (error) => dispatch(fetchDataFailure(error)),
+    changePage: (pageNumber) => dispatch(changePage(pageNumber)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClassComponent);
