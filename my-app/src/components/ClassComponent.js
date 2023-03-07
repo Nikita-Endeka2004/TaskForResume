@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ClassComponent extends Component {
   constructor(props) {
@@ -18,23 +19,21 @@ export default class ClassComponent extends Component {
     const headers = {
       'app-id': '640739832c9a7937e33517e3',
     };
-    fetch(url, { headers })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.data,
-          });
-          console.dir(result);
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
+    axios
+    .get(url, { headers })
+    .then((response) => {
+      this.setState({
+        isLoaded: true,
+        items: response.data.data,
+      });
+      console.dir(response);
+    })
+    .catch((error) => {
+      this.setState({
+        isLoaded: true,
+        error,
+      });
+    });
   }
 
   handleClick = (event) => {
