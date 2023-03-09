@@ -1,24 +1,81 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 export default class ClassComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: this.props.currentPage,
+      error: null,
+      isLoaded: false,
+      items: [],
+      currentPage: 1,
+      itemsPerPage: 10,
+      filteredItems: [], 
+      isFiltered: false, 
     };
-    
-    this.handleClick = this.handleClick.bind(this);
   }
+  componentDidMount() {
+    const url = 'https://dummyapi.io/data/v1/user';
+    const headers = {
+      'app-id': '640739832c9a7937e33517e3',
+    };
+    axios
+    .get(url, { headers })
+    .then((response) => {
+      this.setState({
+        isLoaded: true,
+        items: response.data.data,
+        filteredItems: response.data.data,
+      });
+      console.dir(response);
+    })
+    .catch((error) => {
+      this.setState({
+        isLoaded: true,
+        error,
+      });
+    });
+  };
 
   handleClick = (event) => {
     this.setState({
       currentPage: Number(event.target.id),
     });
   };
+
+  handleFilter = () => {
+    const { items } = this.state;
+    const filteredItem = [...items].sort((a, b) => (a.firstName > b.firstName ? 1 : -1)); 
+    this.setState({
+      filteredItems: filteredItem,
+      isFiltered: true, 
+      currentPage: 1,
+    });
+    console.log('Before', this.state);
+  };
+
+  handleResetFilter = () => {
+    const { items } = this.state;
+    this.setState({
+      filteredItems: items,
+      currentPage: 1,
+      isFiltered: false,
+    });
+    console.log('After', this.state);
+  };
+
   render() {
-    const { error, isLoaded, items, currentPage, itemsPerPage } = this.props;
+    console.log('Before all', this.state);
+    const { error,
+            isLoaded,
+            items,
+            currentPage,
+            itemsPerPage, 
+            filteredItems, 
+            isFiltered } = this.state;
+    const itemsToRender = isFiltered ? filteredItems : items;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = itemsToRender.slice(indexOfFirstItem, indexOfLastItem);
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(items.length / itemsPerPage); i++) {
       pageNumbers.push(i);
@@ -42,6 +99,20 @@ export default class ClassComponent extends Component {
     } else {
       return (
         <div>
+          <div className='filter-buttons'>
+            {!isFiltered && (
+              <button onClick={this.handleFilter}>
+                Filter A to Z
+                <span class="first"></span>
+                <span class="second"></span>
+                <span class="third"></span>
+                <span class="fourth"></span>
+              </button>
+            )}
+            {isFiltered && (
+              <button onClick={this.handleResetFilter}>Reset Filter</button>
+            )}
+          </div>
             <div className='container'>
                 <div className="unit">
                 {currentItems.map((item) => (
