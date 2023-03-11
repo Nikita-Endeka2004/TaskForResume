@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 export default class ClassComponent extends Component {
   constructor(props) {
     super(props);
@@ -103,10 +104,10 @@ export default class ClassComponent extends Component {
             {!isFiltered && (
               <button onClick={this.handleFilter}>
                 Filter A to Z
-                <span class="first"></span>
-                <span class="second"></span>
-                <span class="third"></span>
-                <span class="fourth"></span>
+                <span className="first"></span>
+                <span className="second"></span>
+                <span className="third"></span>
+                <span className="fourth"></span>
               </button>
             )}
             {isFiltered && (
