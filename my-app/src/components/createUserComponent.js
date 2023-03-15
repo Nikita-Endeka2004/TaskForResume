@@ -68,7 +68,7 @@ const UserForm = () => {
         <label>Email:</label>
         <input type="text" name="email" value={user.email} onChange={handleInputChange} />
       </div>
-      <button onClick={handleAddUser} type="submit">Add</button>
+      <button type="submit">Add</button>
     </form>
   );
 };

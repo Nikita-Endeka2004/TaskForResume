@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsers } from '../store/users';
+import { setUsers, setRender, setIsLoaded } from '../store/users';
 
 const ConstFuncComponent = () => {
 
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [filteredItems, setFilteredItems] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const {list: items} = useSelector(state => state.users);
+  const render = useSelector(setRender);
+  const isLoaded = useSelector(setIsLoaded);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(!render.payload.users.render){
     const url = 'https://dummyapi.io/data/v1/user';
     const headers = {
       'app-id': '640739832c9a7937e33517e3',
@@ -23,14 +25,16 @@ const ConstFuncComponent = () => {
     axios
       .get(url, { headers })
       .then((response) => {
-        setIsLoaded(true);
+        dispatch(setIsLoaded(true));
         dispatch(setUsers(response.data.data));
         setFilteredItems(response.data.data);
       })
       .catch((error) => {
-        setIsLoaded(true);
+        dispatch(setIsLoaded(true));
         setError(error);
       });
+      dispatch(setRender(true));
+    }
   }, []);
 
   const handleClick = (event) => {
@@ -82,7 +86,7 @@ const ConstFuncComponent = () => {
     return <h3>Error {error.message}</h3>;
   } 
 
-  if (!isLoaded) {
+  if (!isLoaded.payload.users.isLoaded) {
     return <h3>Has been loading...</h3>;
   } 
   

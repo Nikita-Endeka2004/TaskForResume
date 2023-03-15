@@ -67,7 +67,7 @@ body{
   border-radius: 5px;
 }
 
-button {
+.filter-buttons > button {
   left: 40%;
   border: none;
   padding: 20px 40px;
@@ -83,7 +83,7 @@ button {
   border-radius: 100px;
 }
 
-button:hover {
+.filter-buttons > button:hover {
   color: #000;
 }
 span {
@@ -91,7 +91,7 @@ span {
   z-index: -1;
 }
 
-button .first {
+.filter-buttons > button .first {
   content: "";
   position: absolute;
   right: 100%;
@@ -101,11 +101,11 @@ button .first {
   background: #ffa500;
 }
 
-button:hover .first {
+.filter-buttons > button:hover .first {
   top: 0;
   right: 0;
 }
-button .second {
+.filter-buttons > button .second {
   content: "";
   position: absolute;
   left: 25%;
@@ -115,12 +115,12 @@ button .second {
   background: #ffa500;
 }
 
-button:hover .second {
+.filter-buttons > button:hover .second {
   top: 0;
   left: 50%;
 }
 
-button .third {
+.filter-buttons > button .third {
   content: "";
   position: absolute;
   left: 50%;
@@ -130,12 +130,12 @@ button .third {
   background: #ffa500;
 }
 
-button:hover .third {
+.filter-buttons > button:hover .third {
   top: 0;
   left: 25%;
 }
 
-button .fourth {
+.filter-buttons > button .fourth {
   content: "";
   position: absolute;
   left: 100%;
@@ -145,7 +145,7 @@ button .fourth {
   background: #ffa500;
 }
 
-button:hover .fourth {
+.filter-buttons > button:hover .fourth {
   top: 0;
   left: 0;
 }

@@ -1,7 +1,5 @@
 import ConstFuncComponent from "./components/constFuncComponent";
-import CreateUserComponent from "./components/createUserComponent";
-import DelUserComponenet from "./components/DelUserComponent";
-import UpdateUserComponent from "./components/UpdateUserComponent";
+import AdminMenu from "./components/myAdminComponent";
 import React, { useState } from 'react';
 import './App.css';
 import { Provider, useDispatch, useSelector } from "react-redux";
@@ -21,12 +19,12 @@ function App() {
       <div>
           {!variable.payload.users.variable && (
             <div>
-              <button onClick={handleAddUser}> For add User </button>
+              <button onClick={handleAddUser}> AdminMenu </button>
               <ConstFuncComponent />
             </div>
           )}
           {variable.payload.users.variable && (
-          <CreateUserComponent />
+          <AdminMenu />
           )}
       </div>
     </Provider>
