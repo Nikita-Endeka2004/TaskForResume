@@ -28,20 +28,22 @@ const UserForm = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const newUser = {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email
     };
-    axios.post('https://dummyapi.io/data/v1/user/create', newUser, {
+    console.log(newUser);
+    await axios.post('https://dummyapi.io/data/v1/post/create', {newUser}, {
       headers: {
         'Content-Type': 'application/json',
         'app-id': '640739832c9a7937e33517e3' 
       }
     })
       .then(response => {
+        console.log(response.data);
         dispatch(addUsers(response.data));
         setUser({
           firstName: '',
@@ -55,21 +57,23 @@ const UserForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>First Name:</label>
-        <input type="text" name="firstName" value={user.firstName} onChange={handleInputChange} />
-      </div>
-      <div>
-        <label>Last Name:</label>
-        <input type="text" name="lastName" value={user.lastName} onChange={handleInputChange} />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="text" name="email" value={user.email} onChange={handleInputChange} />
-      </div>
-      <button type="submit">Add</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>First Name:</label>
+          <input type="text" name="firstName" value={user.firstName} onChange={handleInputChange} />
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input type="text" name="lastName" value={user.lastName} onChange={handleInputChange} />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="text" name="email" value={user.email} onChange={handleInputChange} />
+        </div>
+        <button type="submit">Add</button>
+      </form>
+    </div>
   );
 };
 
