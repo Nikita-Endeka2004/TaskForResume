@@ -19,7 +19,9 @@ function App() {
       <div>
           {!variable.payload.users.variable && (
             <div>
-              <button onClick={handleAddUser}> AdminMenu </button>
+              <div className="adminButton">
+                <button className="bubbly-button" onClick={handleAddUser}> AdminMenu </button>
+              </div>
               <ConstFuncComponent />
             </div>
           )}

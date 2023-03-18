@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/creatorcredits-bb');
 
 body{
   background: rgb(235, 225, 225);
@@ -68,7 +69,7 @@ body{
 }
 
 .filter-buttons > button {
-  left: 40%;
+  left: 3%;
   border: none;
   padding: 20px 40px;
   font-size: 34px;
@@ -148,6 +149,185 @@ span {
 .filter-buttons > button:hover .fourth {
   top: 0;
   left: 0;
+}
+
+.center {
+  margin-top: 1.5%;
+  margin-left: 85%;
+  position: absolute;
+}
+
+.btn {
+  width: 180px;
+  height: 60px;
+  cursor: pointer;
+  background: #151515;
+  border: 1px solid #262727;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+
+svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.btn:hover {
+  transition: 1s ease-in-out;
+  background: #252527;
+}
+
+.btn:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.btn span {
+  color: rgb(244, 237, 237);
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.delComponent{
+  font-family: 'CreatorCredits BB', sans-serif;
+}
+
+.delBlock{
+  border: 2px solid rgb(17, 16, 16);
+  border-radius: 20px;
+  padding: 7px;
+  margin-right: 80%;
+}
+
+.delComponent > h1{
+  font-size: 35px;
+  margin: 0;
+  margin-left: 45%;
+}
+
+.gridDelBlock{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.gridDelBlock > div > p {
+  font-size: 20px;
+}
+
+.gridDelBlock > div{
+  padding: 4px;
+  border: 2px solid rgb(17, 16, 16);
+  border-radius: 20px;
+}
+
+.delBlock > p:nth-child(1) {
+  font-size: 20px;
+  text-shadow: 1px 1px 3px rgb(20, 19, 19);
+}
+
+.delBlock > p:nth-child(2) {
+  font-size: 20px;
+  color: rgb(14, 168, 14);
+}
+
+.bubbly-button {
+  display: inline-block;
+  font-size: 1em;
+  padding: 1em 2em;
+  margin-top: 10px;
+  margin-right: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #191818;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+}
+.bubbly-button:focus {
+  outline: 0;
+}
+.bubbly-button:before, .bubbly-button:after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -20%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
+}
+.bubbly-button:active {
+  transform: scale(0.9);
+  background-color: #272526;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+}
+.bubbly-button.animate:before {
+  display: block;
+  animation: topBubbles ease-in-out 0.75s forwards;
+}
+.bubbly-button.animate:after {
+  display: block;
+  animation: bottomBubbles ease-in-out 0.75s forwards;
+}
+
+.adminButton > button{
+  margin-left: 88%;
+}
+
+.btnForFilter{
+  display: grid;
+  grid-template-columns: 350px 350px;
+  gap: 10px;
+}
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrap > .button {
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+  .wrap > .button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.btnClass{
+  margin-top: 20%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 

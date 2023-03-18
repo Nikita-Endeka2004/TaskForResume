@@ -42,11 +42,19 @@ const AdminMenu = () => {
   return (
     <div>
         {!newVariable && (
-            <div>
-                <button onClick={handleAddUser}>Add User</button>
-                <button onClick={handleDeleteUser}>Delete User</button>
-                <button onClick={handleUpdateUser}>Update User</button>
-                <button onClick={handleVariable}>Go to the const page</button>
+            <div className="btnClass">
+              <div className="wrap">
+                <button className="button" onClick={handleAddUser}>Add User</button>
+              </div>
+              <div className="wrap">
+                <button className="button" onClick={handleDeleteUser}>Delete User</button>
+              </div>
+                <div className="wrap">
+                <button className="button" onClick={handleUpdateUser}>Update User</button>
+              </div>
+                <div className="wrap">
+                <button className="button" onClick={handleVariable}>Go to the const page</button>
+              </div>
             </div>
         )}
         {newVariable && (

@@ -10,6 +10,7 @@ const ConstFuncComponent = () => {
   const [itemsPerPage] = useState(10);
   const [filteredItems, setFilteredItems] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
+  const [isFilteredSecond, setIsFilteredSecond] = useState(false);
   const {list: items} = useSelector(state => state.users);
   const render = useSelector(setRender);
   const isLoaded = useSelector(setIsLoaded);
@@ -47,15 +48,25 @@ const ConstFuncComponent = () => {
     );
     setFilteredItems(filteredItem);
     setIsFiltered(true);
+    setIsFilteredSecond(true);
     setCurrentPage(1);
-    console.log('Before', filteredItems);
+  };
+
+  const handleFilterSecond = () => {
+    const filteredItem = [...items].sort((a, b) =>
+      a.firstName > b.firstName ? -1 : 1
+    );
+    setFilteredItems(filteredItem);
+    setIsFilteredSecond(true);
+    setIsFiltered(true);
+    setCurrentPage(1);
   };
 
   const handleResetFilter = () => {
     setFilteredItems(items);
     setCurrentPage(1);
     setIsFiltered(false);
-    console.log('After', filteredItems);
+    setIsFilteredSecond(false);
   };
 
   console.log('Before all', items);
@@ -92,19 +103,35 @@ const ConstFuncComponent = () => {
   
   return (
     <div>
-      <div className='filter-buttons'>
-        {!isFiltered && (
-          <button onClick={handleFilter}>
-            Filter A to Z
-            <span className='first'></span>
-            <span className='second'></span>
-            <span className='third'></span>
-            <span className='fourth'></span>
-          </button>
-        )}
-        {isFiltered && (
-          <button onClick={handleResetFilter}>Reset Filter</button>
-        )}
+      <div className='btnForFilter'>
+        <div className='filter-buttons'>
+          {(!isFiltered) && (
+            <button onClick={handleFilter}>
+              Filter A to Z
+              <span className='first'></span>
+              <span className='second'></span>
+              <span className='third'></span>
+              <span className='fourth'></span>
+            </button>
+          )}
+          {isFiltered && (
+            <button onClick={handleResetFilter}>Reset Filter</button>
+          )}
+        </div>
+        <div className='filter-buttons'>
+          {(!isFiltered) && (
+            <button onClick={handleFilterSecond}>
+              Filter Z to A
+              <span className='first'></span>
+              <span className='second'></span>
+              <span className='third'></span>
+              <span className='fourth'></span>
+            </button>
+          )}
+          {isFiltered && (
+            <button onClick={handleResetFilter}>Reset Filter</button>
+          )}
+        </div>
       </div>
       <div className='container'>
         <div className='unit'>
