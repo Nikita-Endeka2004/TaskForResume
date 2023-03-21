@@ -96,36 +96,46 @@ const UserUpdate = () => {
 
   return (
     <div>
-      <h1>Update User Data</h1>
-      {error && <div>Error: {error}</div>}
-      {success && <div>Success: {success}
-      <button onClick={handleAddUser}>Go to const</button>
-      </div>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="userId">User ID:</label>
-          <input type="text" id="userId" name="userId" value={userId} onChange={handleInputChange} />
+      <button className="bubbly-button" onClick={handleAddUser}>Go to the const page</button>
+      <div className='updateComponent'>
+        <h1>Update User Data</h1>
+        {error && <div className='errorDelComponent'>Error: {error}</div>}
+        {success && <div className='successDelComponent'>Success: {success}
+        </div>}
+        <div className='firstFormUpComponent'>
+          <form onSubmit={handleSubmit}>
+            <div className='labelGroap'>
+              <label htmlFor="userId">User ID:</label>
+              <input type="text" id="userId" name="userId" value={userId} onChange={handleInputChange} />
+            </div>
+            <div className='buttonSubmit'>
+              <button type="submit" className="btn">
+                <span>Fetch User</span>
+              </button>
+            </div>
+          </form>
         </div>
-        <button type="submit">Fetch User</button>
-      </form>
-      {isLoading && <div>Loading...</div>}
-      {user.id &&
-        <form onSubmit={handleUpdate}>
-          <div>
+        <div className='secondFormUpComponent'>
+          <form onSubmit={handleUpdate}>
+            <div className='labelGroap'>
             <label htmlFor="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" value={firstName} onChange={handleInputChange} />
-          </div>
-          <div>
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" value={lastName} onChange={handleInputChange} />
-          </div>
-          <div>
-            <label htmlFor="photo">Photo:</label>
-            <input type="text" id="photo" name="photo" value={photo} onChange={handleInputChange} />
-          </div>
-          <button type="submit">Update User</button>
-        </form>
-      }
+            </div>
+            <div className='labelGroap'>
+              <label htmlFor="lastName">Last Name:</label>
+              <input type="text" id="lastName" name="lastName" value={lastName} onChange={handleInputChange} />
+            </div>
+            <div className='labelGroap'>
+              <label htmlFor="photo">Photo:</label>
+              <input type="text" id="photo" name="photo" value={photo} onChange={handleInputChange} />
+            </div>
+            <button type="submit" className="btn">
+              <span>Update User</span>
+            </button>
+          </form>
+          {isLoading && <div>Loading...</div>}
+        </div>
+        </div>
       </div>
     );
   }

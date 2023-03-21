@@ -141,7 +141,7 @@ const ConstFuncComponent = () => {
                 <img src={item.picture} alt={item.id} />
               </div>
               <p>{item.id}</p>
-              <h3>{`${item.title}. ${item.firstName} ${item.lastName}`}</h3>
+              <h3>{`${item.firstName} ${item.lastName}`}</h3>
                   </div>
               ))}
               </div>

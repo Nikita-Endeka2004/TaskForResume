@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, setState } from 'react';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { setVariable, addUsers } from '../store/users';
@@ -28,22 +28,18 @@ const UserForm = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const newUser = {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email
     };
-    console.log(newUser);
-    await axios.post('https://dummyapi.io/data/v1/post/create', {newUser}, {
-      headers: {
-        'Content-Type': 'application/json',
-        'app-id': '640739832c9a7937e33517e3' 
-      }
-    })
+    const headers = {
+      'app-id': '640739832c9a7937e33517e3' 
+    }
+    axios.post('https://dummyapi.io/data/v1/user/create', newUser, {headers})
       .then(response => {
-        console.log(response.data);
         dispatch(addUsers(response.data));
         setUser({
           firstName: '',
@@ -58,21 +54,25 @@ const UserForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name:</label>
-          <input type="text" name="firstName" value={user.firstName} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input type="text" name="lastName" value={user.lastName} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="text" name="email" value={user.email} onChange={handleInputChange} />
-        </div>
-        <button type="submit">Add</button>
-      </form>
+      <div className='formCreate'>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <input type="text" name="firstName" placeholder='First Name' value={user.firstName} onChange={handleInputChange} />
+          </div>
+          <div>
+            <input type="text" name="lastName" placeholder='Last Name' value={user.lastName} onChange={handleInputChange} />
+          </div>
+          <div>
+            <input type="text" name="email" placeholder='Email' value={user.email} onChange={handleInputChange} />
+          </div>
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div className='btnInCreate'>
+        <button onClick={handleAddUser} className="btn">
+          <span>Go to the const page</span>
+        </button>
+      </div>
     </div>
   );
 };
